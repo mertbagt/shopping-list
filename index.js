@@ -5,14 +5,23 @@
 function itemAdder() {
     $('#js-shopping-list-form').submit( event => {
         event.preventDefault();
-        const newItem = $(this).find('input[name="shopping-list-entry"]');
+        //const newItem = $(this).find('input[name="shopping-list-entry"]');
+        const newItem = $('#shopping-list-entry').val();
+
         const results = [];
-        results.push($(
-            '<li><span class="shopping-item">${newItem}</span><div class="shopping-item-controls">
-            <button class="shopping-item-toggle"><span class="button-label">check</span></button>
-            <button class="shopping-item-delete"><span class="button-label">delete</span></button>
-            </div></li>'));
-        $(".shopping-list").append(results);
+        results.push($(`
+            <li>
+              <span class="shopping-item">${newItem}</span>
+              <div class="shopping-item-controls">
+                <button class="shopping-item-toggle">
+                  <span class="button-label">check</span>
+                </button>
+                <button class="shopping-item-delete">
+                  <span class="button-label">delete</span>
+                </button>
+              </div>
+            </li>`));
+        $('.shopping-list').append(results);   
     });
 }
 
@@ -21,7 +30,8 @@ function itemAdder() {
 
 function itemToggler() {
     $('ul').on('click', 'button.shopping-item-toggle', function(event) {
-        $(this).closest('span').toggleClass('shopping-item__checked')
+        //$(this).closest('span').toggleClass('shopping-item__checked')
+        $(this).closest('li').find('.shopping-item').toggleClass('shopping-item__checked')
     });    
 }  
 
